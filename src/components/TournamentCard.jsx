@@ -1,49 +1,47 @@
-// import React from "react";
-// export default function TournamentCard({tornement}){
-//     return(
-//         <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:scale-105 transition-transform duration-300">
-//             {/* Image du tournoi */}
-//             <img 
-//             src={tornement.image}
-//             alt={tornement.name}
-//             className="w-full h-48 object-cover"
-//              />
-
-//              {/* Infos du tournoi */}
-//              <div className="p-5">
-//                 <span>
-//                     {tornement.category}
-//                 </span>
-//                 <h3>{tornement.name}</h3>
-//                 <p>{tornement.date}</p>
-//                 <button>voir details</button>
-
-//              </div>
-
-//         </div>
-//     );
-// }
-
-import React from "react";
+import React, { useState } from "react";
 import StatusBadge from "./StatusBadge";
 
 export default function TournamentCard({ tournament }) {
-  // 🛡️ Had s-stira daroriya bach ila kant l-data khawya may-t-ferqe3ch l-site
+  const [activeTab, setActiveTab] = useState("info");
+
   if (!tournament) return null;
 
   return (
-    <div className="bg-white p-5 rounded-xl shadow-md border border-gray-100">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-bold text-gray-800">{tournament.title}</h3>
-        <StatusBadge status={tournament.status} />
+    <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+      
+      {/* 🚀 Navigation Tabs - Hna fin ghadi n-khdmo b setActiveTab */}
+      <div className="flex border-b border-gray-100 bg-gray-50">
+        <button 
+          // 💡 Hada huwa l-key: mli kiy-cliqui l-user, setActiveTab kat-khdem
+          onClick={() => setActiveTab("info")} 
+          className={`flex-1 py-3 text-sm font-bold ${activeTab === 'info' ? 'text-blue-600 border-b-2 border-blue-600 bg-white' : 'text-gray-400'}`}
+        >
+          Info
+        </button>
+        
+        <button 
+          // 💡 Hna tani: setActiveTab kat-beddel l-state l "participants"
+          onClick={() => setActiveTab("participants")} 
+          className={`flex-1 py-3 text-sm font-bold ${activeTab === 'participants' ? 'text-blue-600 border-b-2 border-blue-600 bg-white' : 'text-gray-400'}`}
+        >
+          Participants ({tournament.participants?.length || 0})
+        </button>
       </div>
-      
-      <p className="text-gray-600 mb-2 font-medium">📍 {tournament.location}</p>
-      <p className="text-sm text-gray-400 italic">📅 {tournament.date}</p>
-      
-      <div className="mt-4 pt-4 border-t border-gray-50 flex justify-between items-center text-xs font-bold uppercase">
-        <span className="text-blue-600">{tournament.sport}</span>
-        <span className="text-gray-500">{tournament.participantsCount}</span>
+
+      {/* L-Contenu li kiy-tbeddel */}
+      <div className="p-5">
+        {activeTab === "info" ? (
+          <p className="text-gray-600 text-sm">{tournament.description}</p>
+        ) : (
+          <div className="space-y-2">
+             {/* Challenge 5 Logic: Mapping des participants */}
+            {tournament.participants?.map((p) => (
+              <div key={p.id} className="text-sm font-medium p-2 bg-gray-50 rounded">
+                {p.name} - <span className="text-blue-500 uppercase text-[10px]">{p.status}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
