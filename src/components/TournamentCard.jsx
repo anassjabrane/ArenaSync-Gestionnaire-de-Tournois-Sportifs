@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import StatusBadge from "./StatusBadge";
 import ParticipantRow from "./ParticipantRow";
+import RegistrationForm from "./RegistrationForm";
+
 
 export default function TournamentCard({ tournament }) {
   // 1. Définition de l'état (Challenge 5)
