@@ -17,6 +17,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {tournamentDB.map((t) => (
   <TournamentCard key={t.id} tournament={t} />
 ))}
+
+
+
+
       </div>
     </div>
   </React.StrictMode>
