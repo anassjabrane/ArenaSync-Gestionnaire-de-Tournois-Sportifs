@@ -65,7 +65,18 @@ export default function TournamentCard({ tournament }) {
 
       {/* BOUTON D'INSCRIPTION */}
 
-      
+      <div className="px-6 pb-6 mt-auto">
+        <button
+          onClick={() => setIsRegistered(!isRegistered)}
+          className={`w-full py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
+            isRegistered
+              ? "border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-50"
+              : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md"
+          }`}
+        >
+          {isRegistered ? "Se désinscrire" : "S'inscrire au tournoi"}
+        </button>
+      </div>
     </div>
   );
 }
