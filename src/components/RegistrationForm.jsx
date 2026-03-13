@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({OnADD}) {
   // etat de formulaire
   const [nom, setNom] = useState("");
   const [equipe, setEquipe] = useState("");
@@ -12,6 +12,13 @@ export default function RegistrationForm() {
   const handleSubmit = (e) => {
     
     e.preventDefault();
+
+    const newparticipant={
+      id:Date.now() ,
+      name: nom,
+      team: equipe,
+      level: niveau
+    };
 
     
     setMessage(`Bravo ${nom}, tu es inscrit avec l’équipe ${equipe} !`);

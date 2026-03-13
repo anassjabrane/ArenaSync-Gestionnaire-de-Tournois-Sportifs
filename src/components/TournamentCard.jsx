@@ -10,7 +10,12 @@ export default function TournamentCard({ tournament }) {
   // Hada hwa l-bouton dyal s'inscrire (Challenge 1)
   const [isRegistered, setIsRegistered] = useState(false);
 
-  if (!tournament) return null;
+  const [participants ,SetParticipants]=useState(tournament.participants ||[]);
+
+  const handleAddParticipant = (newparticipant)=>{
+
+    SetParticipants([...participants , newparticipant])
+  };
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden h-full flex flex-col">
