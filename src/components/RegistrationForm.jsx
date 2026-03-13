@@ -5,6 +5,7 @@ export default function RegistrationForm() {
   const [nom, setNom] = useState("");
   const [equipe, setEquipe] = useState("");
   const [message, setMessage] = useState("");
+  const [niveau, setNiveau] = useState("débutant");
 
   const isFormValid = nom.length >= 3;
 
@@ -41,7 +42,7 @@ export default function RegistrationForm() {
         className="p-2 border rounded outline-none focus:border-indigo-500"
       />
 
-      {/* <select
+      <select
         value={niveau}
         onChange={(e) => setNiveau(e.target.value)}
         className="p-2 border rounded outline-none"
@@ -49,7 +50,7 @@ export default function RegistrationForm() {
         <option value="débutant">Débutant</option>
         <option value="intermédiaire">Intermédiaire</option>
         <option value="avancé">Avancé</option>
-      </select> */}
+      </select>
 
       {/* 5. Bouton dima disabled ila l-nom sghir (Challenge 2) */}
       <button

@@ -1,82 +1,58 @@
 import React, { useState } from "react";
 import StatusBadge from "./StatusBadge";
 import ParticipantRow from "./ParticipantRow";
-import RegistrationForm from "./RegistrationForm";
-
+// 1. ✅ Importi l-Formulaire dyalk
+import RegistrationForm from "./RegistrationForm"; 
 
 export default function TournamentCard({ tournament }) {
-  // 1. Définition de l'état (Challenge 5)
   const [activeTab, setActiveTab] = useState("info");
-  // ETAS DE INSCRIPTION ******
-
+  
+  // Hada hwa l-bouton dyal s'inscrire (Challenge 1)
   const [isRegistered, setIsRegistered] = useState(false);
 
   if (!tournament) return null;
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden h-full flex flex-col">
+      {/* ... (Header dyal l-card) ... */}
       <div className="p-6 pb-2 flex justify-between items-start gap-3">
-        <h3 className="text-lg font-black text-gray-900 leading-tight">
-          {tournament.title}
-        </h3>
+        <h3 className="text-lg font-black text-gray-900">{tournament.title}</h3>
         <StatusBadge status={tournament.status} />
       </div>
 
-      {/* 🚀 ghadi n-sta3mlo setActiveTab */}
-      <div className="flex px-6 mb-4 gap-2 bg-white">
-        <button
-          // l-warning y-7iyd w l-onglet y-tbeddel
-          onClick={() => setActiveTab("info")}
-          className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${
-            activeTab === "info"
-              ? "bg-indigo-600 text-white shadow-md"
-              : "bg-gray-100 text-gray-400"
-          }`}
-        >
-          Info
-        </button>
+      {/* ... (Tabs: Info / Participants) ... */}
 
-        <button
-          // Hna tani sta3mlnaha bach n-lantiw l-mapping dyal les participants
-          onClick={() => setActiveTab("participants")}
-          className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${
-            activeTab === "participants"
-              ? "bg-indigo-600 text-white shadow-md"
-              : "bg-gray-100 text-gray-400"
-          }`}
-        >
-          Participants ({tournament.participants?.length || 0})
-        </button>
-      </div>
-
-      {/* Logique déclarative (Challenge 5) */}
       <div className="px-6 pb-6 flex-grow">
         {activeTab === "info" ? (
-          <div className="space-y-3">
-            <p className="text-gray-500 text-sm">{tournament.description}</p>
-          </div>
+          <p className="text-gray-500 text-sm text-left">{tournament.description}</p>
         ) : (
           <div className="space-y-1">
-            {/* Challenge 5: Mapping des participants */}
             {tournament.participants?.map((p) => (
               <ParticipantRow key={p.id} participant={p} />
             ))}
           </div>
         )}
+
+        {/* 2. ✅ Affichage Conditionnel (Hna fin katsme3 l-interactivité) */}
+        {/* Ila isRegistered == true, ghadi i-t7el l-formulaire jdid */}
+        {isRegistered && (
+          <div className="mt-4 border-t pt-4 animate-fade-in">
+            <RegistrationForm />
+          </div>
+        )}
       </div>
 
-      {/* BOUTON D'INSCRIPTION */}
-
-      <div className="px-6 pb-6 mt-auto">
+      <div className="px-6 pb-6">
+        {/* 3. ✅ Had l-bouton hwa li kay-t7ekkem f l-état */}
         <button
           onClick={() => setIsRegistered(!isRegistered)}
-          className={`w-full py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
-            isRegistered
-              ? "border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-50"
-              : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md"
+          className={`w-full py-3 rounded-xl text-sm font-bold transition-all ${
+            isRegistered 
+              ? 'bg-red-50 text-red-500 border-2 border-red-500' 
+              : 'bg-indigo-600 text-white shadow-lg'
           }`}
         >
-          {isRegistered ? "Se désinscrire" : "S'inscrire au tournoi"}
+          {isRegistered ? "Annuler l'inscription" : "S'inscrire au tournoi"}
         </button>
       </div>
     </div>
