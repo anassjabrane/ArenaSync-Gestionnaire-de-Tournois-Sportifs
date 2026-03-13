@@ -35,23 +35,27 @@ export default function RegistrationForm({OnAdd}) {
       <h4 className="text-sm font-bold text-gray-700">
         Formulaire d'Inscription
       </h4>
+      
 
-      <input
-        type="text"
-        placeholder="Nom (Min 3 carac.)"
-        value={nom}
-        onChange={(e) => setNom(e.target.value)}
-        className="p-2 border rounded outline-none focus:border-indigo-500"
-      />
 
-      <input
-        type="text"
-        placeholder="Équipe"
-        value={equipe}
-        onChange={(e) => setEquipe(e.target.value)}
-        className="p-2 border rounded outline-none focus:border-indigo-500"
-      />
+      <div className="flex flex-col gap-1">
+  <input
+    type="text"
+    placeholder="Nom (Min 3 carac.)"
+    value={nom}
+    onChange={(e) => setNom(e.target.value)}
+    className={`p-2 border rounded outline-none transition-all ${
+      nom.length > 0 && nom.length < 3 ? "border-orange-400" : "focus:border-indigo-500"
+    }`}
+  />
 
+  {/* 🟢 Had l-message ghadi i-ban ghir ila ktab 1 awla 2 d l-7rouf */}
+  {nom.length > 0 && nom.length < 3 && (
+    <span className="text-orange-500 text-xs ml-1 font-medium italic">
+      Zid chwiya, khass 3 d l-7rouf...
+    </span>
+  )}
+</div>
       <select
         value={niveau}
         onChange={(e) => setNiveau(e.target.value)}
