@@ -21,9 +21,10 @@ export default function RegistrationForm({OnAdd}) {
     };
 
     OnAdd(newparticipant);
-
+    setNom("");
+    setEquipe("");
+    setNiveau("débutant")
     
-    setMessage(`Bravo ${nom}, tu es inscrit avec l’équipe ${equipe} !`);
   };
 
   return (

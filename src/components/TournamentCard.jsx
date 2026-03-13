@@ -17,6 +17,8 @@ export default function TournamentCard({ tournament }) {
     SetParticipants([...participants , newparticipant])
   };
 
+  if(!tournament) return null;
+
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden h-full flex flex-col">
       {/* ... (Header dyal l-card) ... */}
@@ -31,8 +33,9 @@ export default function TournamentCard({ tournament }) {
         {activeTab === "info" ? (
           <p className="text-gray-500 text-sm text-left">{tournament.description}</p>
         ) : (
+
           <div className="space-y-1">
-            {tournament.participants?.map((p) => (
+            {participants.map((p) => (
               <ParticipantRow key={p.id} participant={p} />
             ))}
           </div>
@@ -42,7 +45,7 @@ export default function TournamentCard({ tournament }) {
         {/* Ila isRegistered == true, ghadi i-t7el l-formulaire jdid */}
         {isRegistered && (
           <div className="mt-4 border-t pt-4 animate-fade-in">
-            <RegistrationForm />
+            <RegistrationForm  OnAdd={handleAddParticipant}/>
           </div>
         )}
       </div>
